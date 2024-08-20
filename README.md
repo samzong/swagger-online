@@ -20,3 +20,17 @@ You may also see any lint errors in the console.
 
 - The configuration of DCE version and Swagger file information is in the `src/apiContianers.js` file.
 - Modify the `proxy` in the `package.json` file to point to the correct DCE server.
+
+## Building with Docker
+
+To build the Docker image, run:
+
+```bash
+docker build -t swagger-online .
+```
+
+To run the Docker image, run:
+
+```bash
+docker run -p 8080:80 swagger-online
+```

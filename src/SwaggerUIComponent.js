@@ -8,25 +8,25 @@ import logo from './logo.png';
 const SwaggerUIComponent = () => {
     const [selectedVersion, setSelectedVersion] = useState(Object.keys(apiContainers)[0]);
     const [selectedContainer, setSelectedContainer] = useState(Object.keys(apiContainers[selectedVersion])[0]);
-    const [swaggerUrl, setSwaggerUrl] = useState(apiContainers[selectedVersion][selectedContainer]);
-    const [displayedUrl, setDisplayedUrl] = useState(swaggerUrl);
+    const [swaggerSpec, setSwaggerSpec] = useState(apiContainers[selectedVersion][selectedContainer]);
+    const [displayedSpec, setDisplayedSpec] = useState(swaggerSpec);
 
     const handleVersionChange = (event) => {
         const version = event.target.value;
         setSelectedVersion(version);
         const firstContainer = Object.keys(apiContainers[version])[0];
         setSelectedContainer(firstContainer);
-        setSwaggerUrl(apiContainers[version][firstContainer]);
+        setSwaggerSpec(apiContainers[version][firstContainer]);
     };
 
     const handleContainerChange = (event) => {
         const container = event.target.value;
         setSelectedContainer(container);
-        setSwaggerUrl(apiContainers[selectedVersion][container]);
+        setSwaggerSpec(apiContainers[selectedVersion][container]);
     };
 
     const handleExplore = () => {
-        setDisplayedUrl(swaggerUrl);
+        setDisplayedSpec(swaggerSpec);
     };
 
     return (
@@ -73,12 +73,6 @@ const SwaggerUIComponent = () => {
                         </select>
                         <ChevronDown className="absolute right-2 top-1/2 transform -translate-y-1/2 pointer-events-none" />
                     </div>
-                    <input
-                        type="text"
-                        value={swaggerUrl}
-                        readOnly
-                        className="flex-grow p-2 border rounded mr-2"
-                    />
                     <button
                         onClick={handleExplore}
                         className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors"
@@ -89,7 +83,7 @@ const SwaggerUIComponent = () => {
             </div>
 
             <div className="flex-grow overflow-auto">
-                {displayedUrl && <SwaggerUI url={displayedUrl} />}
+                {displayedSpec && <SwaggerUI spec={displayedSpec} />}
             </div>
         </div>
     );
